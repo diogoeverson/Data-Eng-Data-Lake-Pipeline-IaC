@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "product" {
-  default = "enem-2017"
+  default = "automobile"
 }
 
 variable "upload_directory" {

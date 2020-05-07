@@ -2,7 +2,7 @@
 
 resource "aws_s3_bucket" "landed" {
   bucket = "data-lake-${var.product}-landed"
-  acl    = "public"
+  acl    = "private"
 }
 
 resource "aws_s3_bucket" "raw" {
@@ -22,17 +22,18 @@ resource "aws_s3_bucket" "self-serve" {
 
 #ingestão inicial dos dados
 
-#provisioner "local-exec" {
-#    command = "aws s3 cp --recursive ../raw-data aws_s3_bucket.landed
-#  }
-
-
 resource "aws_s3_bucket_object" "landed_files" {
   for_each = fileset(var.upload_directory, "**/*.*")
   bucket   = aws_s3_bucket.landed.bucket
   key      = replace(each.value, var.upload_directory, "")
   source   = "${var.upload_directory}${each.value}"
-  acl      = "public"
+  acl      = "private"
   etag     = filemd5("${var.upload_directory}${each.value}")
-  #content_type  = lookup(local.mime_types, split(".", each.value)[length(split(".", each.value)) - 1])
+}
+
+#bucket para query result do athena
+
+resource "aws_s3_bucket" "result-query-athena" {
+  bucket = "result-query-athena-${var.product}"
+  acl    = "private"
 }
