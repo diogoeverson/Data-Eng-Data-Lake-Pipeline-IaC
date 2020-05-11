@@ -2,7 +2,7 @@
 
 resource "aws_s3_bucket" "landed" {
   bucket = "data-lake-${var.product}-landed"
-  acl    = "private"
+  acl    = "public-read"
 }
 
 resource "aws_s3_bucket" "raw" {
@@ -27,13 +27,14 @@ resource "aws_s3_bucket_object" "landed_files" {
   bucket   = aws_s3_bucket.landed.bucket
   key      = replace(each.value, var.upload_directory, "")
   source   = "${var.upload_directory}${each.value}"
-  acl      = "private"
+  acl      = "public-read"
   etag     = filemd5("${var.upload_directory}${each.value}")
 }
 
 #bucket para query result do athena
 
-resource "aws_s3_bucket" "result-query-athena" {
-  bucket = "result-query-athena-${var.product}"
-  acl    = "private"
-}
+#resource "aws_s3_bucket" "result-query-athena" {
+#  bucket        = "result-query-athena-${var.product}"
+#  acl           = "private"
+#  force_destroy = "true"
+#}
