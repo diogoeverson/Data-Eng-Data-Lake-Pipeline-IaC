@@ -15,3 +15,4 @@ resource "aws_glue_crawler" "crawler" {
 }
 
 #criação de job via terraform para rodar o crawler
+#etl e afins.... depois partir para o emr e kinesis
