@@ -30,11 +30,3 @@ resource "aws_s3_bucket_object" "landed_files" {
   acl      = "public-read"
   etag     = filemd5("${var.upload_directory}${each.value}")
 }
-
-#bucket para query result do athena
-
-#resource "aws_s3_bucket" "result-query-athena" {
-#  bucket        = "result-query-athena-${var.product}"
-#  acl           = "private"
-#  force_destroy = "true"
-#}
