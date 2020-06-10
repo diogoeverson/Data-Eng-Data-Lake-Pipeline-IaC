@@ -14,16 +14,6 @@ resource "aws_glue_crawler" "crawler" {
   }
 }
 
-resource "aws_glue_connection" "redshift" {
-  connection_properties = {
-    JDBC_CONNECTION_URL = "jdbc:mysql://example.com/exampledatabase"
-    PASSWORD            = "examplepassword"
-    USERNAME            = "exampleusername"
-  }
-
-  name = "example"
-}
-
 resource "aws_glue_job" "example" {
   name     = "example"
   role_arn = "${aws_iam_role.example.arn}"

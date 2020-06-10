@@ -1,4 +1,4 @@
-#criação da camada de storage estruturando as áreas landed, raw, modeled e self-serve do data lake
+#criação da camada de storage estruturando as áreas landed, raw, modeled e self-service do data lake
 
 resource "aws_s3_bucket" "landed" {
   bucket = "data-lake-${var.product}-landed"
@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "modeled" {
   acl    = "private"
 }
 
-resource "aws_s3_bucket" "self-serve" {
+resource "aws_s3_bucket" "self-service" {
   bucket = "data-lake-${var.product}-self-serve"
   acl    = "private"
 }
