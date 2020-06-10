@@ -1,9 +1,9 @@
-data "aws_kinesis_stream" "stream" {
-  name = "stream-name"
+/*data "aws_kinesis_stream" "stream" {
+  name = "stream-automobile"
 }
 
 resource "aws_kinesis_stream" "test_stream" {
-  name             = "terraform-kinesis-test"
+  name             = "terraform-kinesis-automobile"
   shard_count      = 1
   retention_period = 48
 
@@ -16,3 +16,4 @@ resource "aws_kinesis_stream" "test_stream" {
     Environment = "test"
   }
 }
+*/
