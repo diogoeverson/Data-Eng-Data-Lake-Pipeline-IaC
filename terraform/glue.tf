@@ -14,4 +14,21 @@ resource "aws_glue_crawler" "crawler" {
   }
 }
 
-#criação de job via terraform para rodar o crawler, etl e afins.... depois partir para o emr e kinesis
+resource "aws_glue_connection" "redshift" {
+  connection_properties = {
+    JDBC_CONNECTION_URL = "jdbc:mysql://example.com/exampledatabase"
+    PASSWORD            = "examplepassword"
+    USERNAME            = "exampleusername"
+  }
+
+  name = "example"
+}
+
+resource "aws_glue_job" "example" {
+  name     = "example"
+  role_arn = "${aws_iam_role.example.arn}"
+
+  command {
+    script_location = "s3://${aws_s3_bucket.example.bucket}/example.py"
+  }
+}
