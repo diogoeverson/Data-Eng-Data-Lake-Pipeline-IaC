@@ -12,13 +12,8 @@ resource "aws_glue_crawler" "crawler" {
   s3_target {
     path = "s3://${aws_s3_bucket.landed.bucket}"
   }
+
+  provisioner "local-exec" {
+    command = "aws glue start-crawler --name crawler_${var.product}"
+  }
 }
-
-#resource "aws_glue_job" "example" {
-#  name     = "example"
-#  role_arn = "${aws_iam_role.example.arn}"
-
-#  command {
-#    script_location = "s3://${aws_s3_bucket.example.bucket}/example.py"
-#  }
-#}
